@@ -10,6 +10,7 @@
             background-image: url('./mindo_cloud-forest.jpg');
             background-size: cover;
             background-position: center;
+            font-weight: 100;
         }
     </style>
 </head>
@@ -22,8 +23,28 @@
     <script type="text/javascript">
         var el = document.getElementById('daysLeft');
         var then = moment('20141126','YYYYMMDD');
-        var today = moment();
-        el.textContent = then.diff(today, 'days');
+
+        renderCountdown();
+
+        window.setInterval(renderCountdown, 1000);
+
+        function renderCountdown () {
+            var today = moment();
+            var days = then.diff(today, 'days');
+            today.add(days, 'days');
+            var hours = then.diff(today, 'hours');
+            today.add(hours, 'hours');
+            var mins = then.diff(today, 'minutes');
+            today.add(mins, 'minutes');
+            var secs = then.diff(today, 'seconds');
+            var html = [
+                days + ' days & ' +
+                hours + ' hours',
+                ' & ' + mins + ' minutes',
+                ' & ' + secs + ' seconds'
+            ].join('<br>');
+            el.innerHTML = html;
+        }
     </script>
 </body>
 </html>
