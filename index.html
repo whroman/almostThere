@@ -3,22 +3,30 @@
     <title>Time Left</title>
     <style type="text/css">
         body {
-            font-family: helvetica, arial, sans-serif;
-            font-size: 40px;
-            text-align: center;
+            font-family: "helvetica neue", arial, sans-serif;
+            font-size: 58px;
+            text-align: right;
             line-height: 1.5em;
             background-image: url('./mindo_cloud-forest.jpg');
             background-size: cover;
             background-position: center;
             font-weight: 100;
+            text-shadow: 2px 2px 10px #000000;
+            color: white;
+        }
+
+        #overlay {
+            position: fixed;
+            bottom: 0.25em;
+            right: 1em;
         }
     </style>
 </head>
 <body>
-    <div>
+    <div id="overlay">
         <span id="daysLeft"></span>
-        <span> days left</span>
     </div>
+
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.min.js"></script>
     <script type="text/javascript">
         var el = document.getElementById('daysLeft');
@@ -38,11 +46,12 @@
             today.add(mins, 'minutes');
             var secs = then.diff(today, 'seconds');
             var html = [
-                days + ' days & ' +
+                '<div>' +
+                days + ' days',
                 hours + ' hours',
-                ' & ' + mins + ' minutes',
-                ' & ' + secs + ' seconds'
-            ].join('<br>');
+                mins + ' minutes',
+                secs + ' seconds left</div>'
+            ].join('</div><div>');
             el.innerHTML = html;
         }
     </script>
